@@ -81,7 +81,7 @@ function ColorPicker({setIsReplaceMode, palette, brushColor, setBrushColor, setP
       <div className="input_wrapper">
         <input value={hex} onChange={e => handleHexChange(e)} on/>
         <div className="input_button" onClick={()=>updateHSLA(hex)}>Select</div>
-        <div className="input_button" onClick={()=>setIsReplaceMode(true)} style={isReplaceMode ? {backgroundColor:'#3277b3'}: {backgroundColor:'#5AB2FF'}}>Replace</div>
+        <div className="input_button" onClick={()=>setIsReplaceMode(!isReplaceMode)} style={isReplaceMode ? {backgroundColor:'#3277b3'}: {backgroundColor:'#5AB2FF'}}>Replace</div>
       </div>
       <div>
         <input className = "color-slider color-slider--hue" type="range" min="0" max="360" value={hue} onChange={e => setHue(e.target.value)} />

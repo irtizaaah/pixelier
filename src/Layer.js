@@ -61,17 +61,16 @@ const Layer = ({ numOfPixels, brushColor, isGrid, mode, backgroundColor, drawing
         square.style.backgroundColor = drawing.current[index];
 
         // Attach mouse event handlers to each square
-        if(mode==DRAW || mode==ERASE) setEventHandlers(square, index, isDrawing);
+        if(mode===DRAW || mode===ERASE) setEventHandlers(square, index, isDrawing);
 
         canvas.appendChild(square);
       }
     }
-  }, [numOfPixels, brushColor]);  // Add brushColor to the dependencies array if needed
+  }, [numOfPixels, brushColor, isGrid]);  // Add brushColor to the dependencies array if needed
 
   const draw = (pixel) => {
     pixel.style.backgroundColor = brushColor;  // Apply the brush color to the backgroundColor
     drawing.current[pixel.id] = brushColor;
-    console.log(mode)
   };
 
   return (

@@ -1,0 +1,16 @@
+input[type="range"] {
+    width: 100%;
+  }
+  
+  label {
+    display: block;
+    margin: 10px 0 5px;
+  }
+.color-viewer{ 
+    padding: 20px;
+    border-radius: 15px;
+}
+
+p{
+    color: white;
+}

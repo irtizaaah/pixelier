@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/pixelier/static/css/main.c5a2c619.css",
-    "main.js": "/pixelier/static/js/main.69d5b1e2.js",
+    "main.js": "/pixelier/static/js/main.40d9acfc.js",
     "static/media/hand-selected.svg": "/pixelier/static/media/hand-selected.69cbcecdd304608be00157b160ec88e2.svg",
     "static/media/hand.svg": "/pixelier/static/media/hand.9c8c3c9d1956bdc92da0905d5d19ac25.svg",
     "static/media/download.svg": "/pixelier/static/media/download.4e4450bb62f9cde0e47e9ad125fe5fb9.svg",
@@ -10,11 +10,13 @@
     "index.html": "/pixelier/index.html",
     "static/media/draw-selected.svg": "/pixelier/static/media/draw-selected.e267b724376227192d2289445c316327.svg",
     "static/media/draw.svg": "/pixelier/static/media/draw.1344d7db41e186c67da6b859c538af4d.svg",
+    "static/media/grid-selected.svg": "/pixelier/static/media/grid-selected.253fbdb2eb6ea3bbd7ab591d065b3428.svg",
+    "static/media/grid.svg": "/pixelier/static/media/grid.e65caf498522c96417d5b107c9c2a657.svg",
     "main.c5a2c619.css.map": "/pixelier/static/css/main.c5a2c619.css.map",
-    "main.69d5b1e2.js.map": "/pixelier/static/js/main.69d5b1e2.js.map"
+    "main.40d9acfc.js.map": "/pixelier/static/js/main.40d9acfc.js.map"
   },
   "entrypoints": [
     "static/css/main.c5a2c619.css",
-    "static/js/main.69d5b1e2.js"
+    "static/js/main.40d9acfc.js"
   ]
 }

@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/pixel_editor/static/css/main.cef02f98.css",
-    "main.js": "/pixel_editor/static/js/main.9bfeeba5.js",
-    "static/media/hand.svg": "/pixel_editor/static/media/hand.f295251217c134cf9b4a01528b4972c6.svg",
-    "index.html": "/pixel_editor/index.html",
-    "static/media/draw.svg": "/pixel_editor/static/media/draw.106f5388a143fe95307018c2a3fc14ac.svg",
-    "main.cef02f98.css.map": "/pixel_editor/static/css/main.cef02f98.css.map",
-    "main.9bfeeba5.js.map": "/pixel_editor/static/js/main.9bfeeba5.js.map"
+    "main.css": "/pixelier/static/css/main.cef02f98.css",
+    "main.js": "/pixelier/static/js/main.6c9685b8.js",
+    "static/media/hand.svg": "/pixelier/static/media/hand.f295251217c134cf9b4a01528b4972c6.svg",
+    "index.html": "/pixelier/index.html",
+    "static/media/draw.svg": "/pixelier/static/media/draw.106f5388a143fe95307018c2a3fc14ac.svg",
+    "main.cef02f98.css.map": "/pixelier/static/css/main.cef02f98.css.map",
+    "main.6c9685b8.js.map": "/pixelier/static/js/main.6c9685b8.js.map"
   },
   "entrypoints": [
     "static/css/main.cef02f98.css",
-    "static/js/main.9bfeeba5.js"
+    "static/js/main.6c9685b8.js"
   ]
 }

@@ -1,15 +1,20 @@
 {
   "files": {
-    "main.css": "/pixelier/static/css/main.cef02f98.css",
-    "main.js": "/pixelier/static/js/main.d0bb017f.js",
-    "static/media/hand.svg": "/pixelier/static/media/hand.f295251217c134cf9b4a01528b4972c6.svg",
+    "main.css": "/pixelier/static/css/main.c5a2c619.css",
+    "main.js": "/pixelier/static/js/main.69d5b1e2.js",
+    "static/media/hand-selected.svg": "/pixelier/static/media/hand-selected.69cbcecdd304608be00157b160ec88e2.svg",
+    "static/media/hand.svg": "/pixelier/static/media/hand.9c8c3c9d1956bdc92da0905d5d19ac25.svg",
+    "static/media/download.svg": "/pixelier/static/media/download.4e4450bb62f9cde0e47e9ad125fe5fb9.svg",
+    "static/media/eraser-selected.svg": "/pixelier/static/media/eraser-selected.323419dd97ab603a50c8be5072471013.svg",
+    "static/media/eraser.svg": "/pixelier/static/media/eraser.9e7d6226af3126603edd4fe837a61fdc.svg",
     "index.html": "/pixelier/index.html",
-    "static/media/draw.svg": "/pixelier/static/media/draw.106f5388a143fe95307018c2a3fc14ac.svg",
-    "main.cef02f98.css.map": "/pixelier/static/css/main.cef02f98.css.map",
-    "main.d0bb017f.js.map": "/pixelier/static/js/main.d0bb017f.js.map"
+    "static/media/draw-selected.svg": "/pixelier/static/media/draw-selected.e267b724376227192d2289445c316327.svg",
+    "static/media/draw.svg": "/pixelier/static/media/draw.1344d7db41e186c67da6b859c538af4d.svg",
+    "main.c5a2c619.css.map": "/pixelier/static/css/main.c5a2c619.css.map",
+    "main.69d5b1e2.js.map": "/pixelier/static/js/main.69d5b1e2.js.map"
   },
   "entrypoints": [
-    "static/css/main.cef02f98.css",
-    "static/js/main.d0bb017f.js"
+    "static/css/main.c5a2c619.css",
+    "static/js/main.69d5b1e2.js"
   ]
 }

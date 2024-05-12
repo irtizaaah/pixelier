@@ -17,6 +17,7 @@ function ToolBar({ isGrid, setIsGrid, brushColor, setBrushColor, setMode, mode }
   const DRAW = 1;
   const ERASE = 2;
 
+  const [isReplaceMode, setIsReplaceMode] = useState(false);
   const [palette, setPalette] = useState(["#240A34", "#891652", "#EABE6C", "#F3E99F", "#83C0C1", "#96E9C6", "", ""]);
   const [paletteVisible, setPaletteVisible] = useState(false);
   const [mostRecentColor, setMostRecentColor] = useState("#000");
@@ -42,6 +43,33 @@ function ToolBar({ isGrid, setIsGrid, brushColor, setBrushColor, setMode, mode }
     setPaletteVisible(!paletteVisible);
   };
 
+  const renderPaletteModal = () => (
+    <div className="overlay" onClick={togglePalette}>
+      <ColorPicker isReplaceMode = {isReplaceMode} setIsReplaceMode={setIsReplaceMode} palette={palette} setPalette={setPalette} brushColor={brushColor} setBrushColor={setBrushColor} />
+      <div className="modal">
+        {palette.map((color, index) => (
+          <div
+            key={index}
+            className="color"
+            style={{ backgroundColor: color }}
+            onClick={(e) => {
+              e.stopPropagation(); // Prevent the overlay click from closing the modal
+              if(isReplaceMode){
+                const newPalette = [...palette];
+                newPalette[index] = brushColor;
+                setPalette(newPalette);
+                setIsReplaceMode(false);
+              }
+              else{
+                setBrushColor(color);
+              }
+            }}
+          ></div>
+        ))}
+      </div>
+    </div>
+  );
+
   return (
     <div className='ToolBar'>
       <div className="Icon" onClick={handleDownload}>
@@ -62,23 +90,7 @@ function ToolBar({ isGrid, setIsGrid, brushColor, setBrushColor, setMode, mode }
       <div className="palette" onClick={togglePalette}>
         <div className="color" style={{ backgroundColor: `${brushColor}` }}></div>
       </div>
-      {paletteVisible && (
-        <div className="overlay" onClick={togglePalette}>
-          <div className="modal">
-            {palette.map((color, index) => (
-              <div
-                key={index}
-                className="color"
-                style={{ backgroundColor: color }}
-                onClick={(e) => {
-                  e.stopPropagation(); // Prevent the overlay click from closing the modal
-                  setBrushColor(color);
-                }}
-              ></div>
-            ))}
-          </div>
-        </div>
-      )}
+      {paletteVisible && renderPaletteModal()}
     </div>
   );
 }

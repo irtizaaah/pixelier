@@ -8,16 +8,34 @@ const Layer = ({ numOfPixels, brushColor, isGrid, isDrawMode, drawing}) => {
   const setEventHandlers = (square, index, isDrawing) => {
     square.onmousedown = (e) => {
       isDrawing.current = true;
-      draw(e.target, index);  // Start drawing on mousedown
+      draw(e.target);  // Start drawing on mousedown
     };
   
     square.onmouseenter = (e) => {
-      if(isDrawing.current) draw(e.target, index); // Continue drawing if mouse is down
+      if(isDrawing.current) draw(e.target); // Continue drawing if mouse is down
     };
   
     square.onmouseup = () => {
       isDrawing.current = false;
     };
+
+    // Touch events
+    square.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      isDrawing.current = true;
+      draw(e.target);
+    }, { passive: false });
+
+    square.addEventListener('touchmove', (e) => {
+      e.preventDefault();
+      const touch = e.touches[0];
+      const target = document.elementFromPoint(touch.clientX, touch.clientY);
+      if(target && isDrawing.current) draw(target);
+    }, { passive: false });
+    
+    square.addEventListener('touchend', () => {
+      isDrawing.current = false;
+    });
   }
 
   useEffect(() => {
@@ -35,10 +53,10 @@ const Layer = ({ numOfPixels, brushColor, isGrid, isDrawMode, drawing}) => {
 
         const square = document.createElement('div');
         if(isGrid) square.style.border = `0.3px solid #EEEEEE`;
+        square.id = `${index}`
         square.style.backgroundColor = drawing.current[index];
 
         // Attach mouse event handlers to each square
-        console.log(isDrawMode);
         if(isDrawMode) setEventHandlers(square, index, isDrawing);
 
         canvas.appendChild(square);
@@ -46,9 +64,9 @@ const Layer = ({ numOfPixels, brushColor, isGrid, isDrawMode, drawing}) => {
     }
   }, [numOfPixels, brushColor]);  // Add brushColor to the dependencies array if needed
 
-  const draw = (pixel, index) => {
+  const draw = (pixel) => {
     pixel.style.backgroundColor = brushColor;  // Apply the brush color to the background
-    drawing.current[index] = brushColor;
+    drawing.current[pixel.id] = brushColor;
   };
 
   return (

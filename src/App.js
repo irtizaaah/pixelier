@@ -5,7 +5,7 @@ import './App.css';
 
 function App() {
   const defaultBrushColor = "#000";
-  const defaultNumOfPixels = 64;
+  const defaultNumOfPixels = 32;
   const defaultIsGrid = false;
   const defaultIsDrawMode = true;
 

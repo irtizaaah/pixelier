@@ -4,28 +4,35 @@ import ToolBar from './ToolBar';
 import './App.css';
 
 function App() {
+  const VIEW = 0;
+  const DRAW = 1;
+  const ERASE = 2;
+
   const defaultBrushColor = "#000";
   const defaultNumOfPixels = 32;
-  const defaultIsGrid = false;
-  const defaultIsDrawMode = true;
+  const defaultIsGrid = true;
+  const defaultMode = DRAW;
+  const defaultBackgroundColor = "#fff";
 
-  const [isGrid, setIsGrid] = useState(defaultIsGrid)
+  const [isGrid, setIsGrid] = useState(defaultIsGrid);
+  const [backgroundColor, setBackgroundColor] = useState(defaultBackgroundColor);
   const [numOfPixels, setNumOfPixels] = useState(defaultNumOfPixels);
   const drawing = useRef(getEmptyDrawing());
   const inactiveLayers = useRef(getEmptyDrawing());
   const [brushColor, setBrushColor] = useState(defaultBrushColor);
-  const [isDrawMode, setIsDrawMode] = useState(defaultIsDrawMode);
+  const [mode, setMode] = useState(defaultMode);
 
   return (
     <div className='App'>
-      <ToolBar setBrushColor={setBrushColor} setIsDrawMode={setIsDrawMode} isDrawMode={isDrawMode}/>
+      <ToolBar brushColor={brushColor} setBrushColor={setBrushColor} setMode={setMode} mode={mode}/>
       <Frame 
         numOfPixels={numOfPixels} 
         brushColor={brushColor} 
         isGrid={isGrid} 
         drawing={drawing} 
         inactiveLayers={inactiveLayers}
-        isDrawMode = {isDrawMode}
+        mode = {mode}
+        backgroundColor = {backgroundColor}
       />
     </div>
   );

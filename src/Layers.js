@@ -1,7 +1,6 @@
 import Layer from "./Layer"
 
-function Layers({numOfPixels, brushColor, isGrid, drawing, inactiveLayers, isDrawMode}){
-
+function Layers({numOfPixels, brushColor, isGrid, drawing, backgroundColor, mode}){
 return(
     <div className = "Layers">
     <div className="layer-wrapper">
@@ -11,7 +10,8 @@ return(
             brushColor={brushColor} 
             isGrid={isGrid} 
             drawing={drawing} 
-            isDrawMode={isDrawMode}
+            mode={mode}
+            backgroundColor = {backgroundColor}
             />
         </div>
     </div>);

@@ -16,11 +16,6 @@
     margin: 0.5rem;
 }
 
-.Mode{
-    width: 3rem;
-    height: 3rem;
-}
-
 .color{
     width: 2rem;
     height: 2rem;
@@ -32,9 +27,25 @@
     display: flex;
 }
 
-.Download{
-    width: 2rem;
-    height: 2rem;
-    border-radius: 10px;
-    background-color: brown;
+.Icon{
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.palette-modal {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  

@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState} from 'react';
 import './Layer.css';
 
-const Layer = ({ numOfPixels, brushColor, isGrid, isDrawMode, drawing}) => {
+const Layer = ({ numOfPixels, brushColor, isGrid, mode, backgroundColor, drawing}) => {
   const canvasRef = useRef(null);
   const isDrawing = useRef(false);
 
@@ -39,6 +39,9 @@ const Layer = ({ numOfPixels, brushColor, isGrid, isDrawMode, drawing}) => {
   }
 
   useEffect(() => {
+    const DRAW = 1;
+    const ERASE = 2;
+
     const canvas = canvasRef.current;
     canvas.innerHTML = '';  // Clear previous isGrid
     isDrawing.current = false;
@@ -46,6 +49,7 @@ const Layer = ({ numOfPixels, brushColor, isGrid, isDrawMode, drawing}) => {
     const pixelSize = `calc(min(100vh, 100vw) / ${numOfPixels})`;
     canvas.style.gridTemplateColumns = `repeat(${numOfPixels}, ${pixelSize})`;
     canvas.style.gridTemplateRows = `repeat(${numOfPixels}, ${pixelSize})`; // Corrected property name
+    canvas.style.backgroundColor = backgroundColor;
 
     for (let i = 0; i < numOfPixels; i++) {
       for (let j = 0; j < numOfPixels; j++) {
@@ -57,7 +61,7 @@ const Layer = ({ numOfPixels, brushColor, isGrid, isDrawMode, drawing}) => {
         square.style.backgroundColor = drawing.current[index];
 
         // Attach mouse event handlers to each square
-        if(isDrawMode) setEventHandlers(square, index, isDrawing);
+        if(mode==DRAW || mode==ERASE) setEventHandlers(square, index, isDrawing);
 
         canvas.appendChild(square);
       }
@@ -65,8 +69,9 @@ const Layer = ({ numOfPixels, brushColor, isGrid, isDrawMode, drawing}) => {
   }, [numOfPixels, brushColor]);  // Add brushColor to the dependencies array if needed
 
   const draw = (pixel) => {
-    pixel.style.backgroundColor = brushColor;  // Apply the brush color to the background
+    pixel.style.backgroundColor = brushColor;  // Apply the brush color to the backgroundColor
     drawing.current[pixel.id] = brushColor;
+    console.log(mode)
   };
 
   return (

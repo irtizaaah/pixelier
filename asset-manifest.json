@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/pixelier/static/css/main.cef02f98.css",
-    "main.js": "/pixelier/static/js/main.94b18a26.js",
+    "main.js": "/pixelier/static/js/main.c1b4f173.js",
     "static/media/hand.svg": "/pixelier/static/media/hand.f295251217c134cf9b4a01528b4972c6.svg",
     "index.html": "/pixelier/index.html",
     "static/media/draw.svg": "/pixelier/static/media/draw.106f5388a143fe95307018c2a3fc14ac.svg",
     "main.cef02f98.css.map": "/pixelier/static/css/main.cef02f98.css.map",
-    "main.94b18a26.js.map": "/pixelier/static/js/main.94b18a26.js.map"
+    "main.c1b4f173.js.map": "/pixelier/static/js/main.c1b4f173.js.map"
   },
   "entrypoints": [
     "static/css/main.cef02f98.css",
-    "static/js/main.94b18a26.js"
+    "static/js/main.c1b4f173.js"
   ]
 }

@@ -1,0 +1,40 @@
+.ToolBar{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    z-index: 1;
+    bottom: 10px;
+    right: 0px;
+    background-color: black;
+    border-radius: 15px;
+    margin: 1rem;
+}
+
+.ToolBar *{
+    margin: 0.5rem;
+}
+
+.Mode{
+    width: 3rem;
+    height: 3rem;
+}
+
+.color{
+    width: 2rem;
+    height: 2rem;
+    margin: 0.25rem;
+    border-radius: 10px;
+    border: 1px solid white;
+}
+.palette{
+    display: flex;
+}
+
+.Download{
+    width: 2rem;
+    height: 2rem;
+    border-radius: 10px;
+    background-color: brown;
+}

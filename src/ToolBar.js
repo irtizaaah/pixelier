@@ -65,6 +65,10 @@ function ToolBar({ isGrid, setIsGrid, brushColor, setBrushColor, setMode, mode }
     setBrushColor(mostRecentColor);
   };
 
+  const handleView = () => {
+    setMode(VIEW)
+  };
+
   const handleDownload = () => {
     const fileData = ""; // You might need actual data here
     const blob = new Blob([fileData], { type: 'text/plain' });
@@ -83,7 +87,7 @@ function ToolBar({ isGrid, setIsGrid, brushColor, setBrushColor, setMode, mode }
       <div className="Icon" onClick={() => setIsGrid(!isGrid)}>
         <img src={isGrid ? gridIconSelected : gridIcon} alt="Grid" />
       </div>
-      <div className="Icon" onClick={() => setMode(VIEW)}>
+      <div className="Icon" onClick={handleView}>
         <img src={mode === VIEW ? handIconSelected : handIcon} alt="View Mode" />
       </div>
       <div className="Icon" onClick={handleErase}>

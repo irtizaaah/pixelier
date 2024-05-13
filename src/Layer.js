@@ -6,16 +6,13 @@ const Layer = ({ numOfPixels, brushColor, isGrid, mode, backgroundColor, drawing
   const isDrawing = useRef(false);
 
   const setEventHandlers = (square, index, isDrawing) => {
-    const DRAW = 1;
-    const ERASE = 2;
-
     square.onmousedown = (e) => {
       isDrawing.current = true;
-      if(mode===DRAW || mode===ERASE) draw(e.target);  // Start drawing on mousedown
+      draw(e.target);  // Start drawing on mousedown
     };
   
     square.onmouseenter = (e) => {
-      if((mode===DRAW || mode===ERASE) && (isDrawing.current)) draw(e.target); // Continue drawing if mouse is down
+      if(isDrawing.current) draw(e.target); // Continue drawing if mouse is down
     };
   
     square.onmouseup = () => {
@@ -25,7 +22,7 @@ const Layer = ({ numOfPixels, brushColor, isGrid, mode, backgroundColor, drawing
     // Touch events
     square.addEventListener('touchstart', (e) => {
       e.preventDefault();
-      if(mode===DRAW || mode===ERASE) isDrawing.current = true;
+      isDrawing.current = true;
       draw(e.target);
     }, { passive: false });
 
@@ -33,7 +30,7 @@ const Layer = ({ numOfPixels, brushColor, isGrid, mode, backgroundColor, drawing
       e.preventDefault();
       const touch = e.touches[0];
       const target = document.elementFromPoint(touch.clientX, touch.clientY);
-      if((mode===DRAW || mode===ERASE) &&target && isDrawing.current) draw(target);
+      if(target && isDrawing.current) draw(target);
     }, { passive: false });
     
     square.addEventListener('touchend', () => {
@@ -66,11 +63,15 @@ const Layer = ({ numOfPixels, brushColor, isGrid, mode, backgroundColor, drawing
         canvas.appendChild(square);
       }
     }
-  }, [numOfPixels, brushColor, isGrid]);  // Add brushColor to the dependencies array if needed
+  }, [numOfPixels, brushColor, isGrid, mode]);  // Add brushColor to the dependencies array if needed
 
   const draw = (pixel) => {
-    pixel.style.backgroundColor = brushColor;  // Apply the brush color to the backgroundColor
-    drawing.current[pixel.id] = brushColor;
+    const DRAW = 1;
+    const ERASE = 2;
+    if(mode===DRAW || mode===ERASE){
+      pixel.style.backgroundColor = brushColor;  // Apply the brush color to the backgroundColor
+      drawing.current[pixel.id] = brushColor;
+    }
   };
 
   return (

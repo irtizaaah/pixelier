@@ -9,11 +9,17 @@
     z-index: 1;
     background-color: black;
     border-radius: 15px;
-    margin: 1rem;
+    margin: 0.5rem;
 }
 
-.ToolBar *{
-    margin: 0.5rem;
+.ToolBarItems{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.ToolBarItems *{
 }
 
 .color{
@@ -33,7 +39,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0.5rem;
 }
+
 
 .palette-modal {
     position: fixed;
@@ -62,6 +70,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin: 0.5rem;
 }
 
 .overlay {

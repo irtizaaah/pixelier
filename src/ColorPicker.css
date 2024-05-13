@@ -131,6 +131,7 @@ p, label{
     justify-content: center;
     align-items: center;
     padding: 1rem;
+    margin: 0.5rem;
   }
   
   .input_button{
@@ -144,5 +145,6 @@ p, label{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0.5rem;
 
   }

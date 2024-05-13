@@ -5,27 +5,28 @@ function ColorPicker({setIsReplaceMode, palette, brushColor, setBrushColor, setP
   const [hue, setHue] = useState(360); // 0-360 degrees
   const [saturation, setSaturation] = useState(100); // Percentage
   const [lightness, setLightness] = useState(50); // Percentage
-  const [alpha, setAlpha] = useState(1); // 0-1
   const [hex, setHex] = useState("");
 
   function hexToHSLA(hex) {
-    // Convert hex to RGB first
-    let r = 0, g = 0, b = 0;
-    if (hex.length === 4) {
-        r = parseInt(hex[1] + hex[1], 16);
-        g = parseInt(hex[2] + hex[2], 16);
-        b = parseInt(hex[3] + hex[3], 16);
-    } else if (hex.length === 7) {
-        r = parseInt(hex.substring(1, 3), 16);
-        g = parseInt(hex.substring(3, 5), 16);
-        b = parseInt(hex.substring(5, 7), 16);
+    // Remove the hash at the start if it's there
+    hex = hex.replace(/^#/, '');
+
+    // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+    if (hex.length === 3 || hex.length === 4) {
+        hex = hex.split('').map(char => char + char).join('');
     }
 
-    // Then convert RGB to HSL
+    // Parse the hex string to get the RGB(A) components
+    let r = parseInt(hex.slice(0, 2), 16);
+    let g = parseInt(hex.slice(2, 4), 16);
+    let b = parseInt(hex.slice(4, 6), 16);
+
+    // Convert RGB to HSL
     r /= 255;
     g /= 255;
     b /= 255;
-    const max = Math.max(r, g, b), min = Math.min(r, g, b);
+    const max = Math.max(r, g, b);
+    const min = Math.min(r, g, b);
     let h, s, l = (max + min) / 2;
 
     if (max === min) {
@@ -41,30 +42,20 @@ function ColorPicker({setIsReplaceMode, palette, brushColor, setBrushColor, setP
         h /= 6;
     }
 
-    // Convert fractional form to 360° value
-    h = Math.round(360 * h);
-    s = Math.round(s * 100);
-    l = Math.round(l * 100);
-
-    // Return HSLA color as an object
-    return {
-        h: h,
-        s: s,
-        l: l,
-        a: 1 // default alpha as 1 (fully opaque)
-    };
+    return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100)};
 }
 
   useEffect(()=>{
     setHex(hslToHex(hue, saturation, lightness));
-  },[hue, saturation, lightness, alpha]) 
+  },[hue, saturation, lightness]) 
 
   const updateHSLA = (hex) =>{
     let hsla = hexToHSLA(hex)
     setHue(hsla.h);
     setSaturation(hsla.s);
     setLightness(hsla.l);
-    setAlpha(hsla.a);
+    setBrushColor(hex);
+    console.log(hex)
   }
 
   const handleHexChange = (e) =>{
@@ -72,7 +63,7 @@ function ColorPicker({setIsReplaceMode, palette, brushColor, setBrushColor, setP
   }
 
   // Function to format the displayed color with HSLA
-  const getHSLA = () => `hsla(${hue}, ${saturation}%, ${lightness}%, ${alpha})`;
+  const getHSLA = () => `hsla(${hue}, ${saturation}%, ${lightness}%)`;
 
 
   return (
@@ -90,26 +81,22 @@ function ColorPicker({setIsReplaceMode, palette, brushColor, setBrushColor, setP
         <input className = "color-slider color-slider--saturation" type="range" min="0" max="100" value={saturation} onChange={e => setSaturation(e.target.value)} />
       </div>
       <div>
-        <label>Lightness</label>
         <input className = "color-slider color-slider--lightness" type="range" min="0" max="100" value={lightness} onChange={e => setLightness(e.target.value)} />
-      </div>
-      <div>
-        <label>Alpha</label>
-        <input type="range" min="0" max="1" step="0.01" value={alpha} onChange={e => setAlpha(e.target.value)} />
       </div>
     </div>
   );
 }
 
 function hslToHex(h, s, l) {
-    l /= 100;
-    const a = s * Math.min(l, 1 - l) / 100;
-    const f = n => {
-        const k = (n + h / 30) % 12;
-        const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
-        return Math.round(255 * color).toString(16).padStart(2, '0');   // convert to Hex and prefix "0" if needed
-    };
-    return `#${f(0)}${f(8)}${f(4)}`;
+  l /= 100;
+  const a = s * Math.min(l, 1 - l) / 100;
+  const f = n => {
+      const k = (n + h / 30) % 12;
+      const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+      return Math.round(255 * color).toString(16).padStart(2, '0');   // convert to Hex and prefix "0" if needed
+  };
+  return `#${f(0)}${f(8)}${f(4)}`;
 }
+
 
 export default ColorPicker;

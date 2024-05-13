@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './ToolBar.css';
 import handIcon from "./assets/hand.svg";
 import drawIcon from "./assets/draw.svg";
@@ -11,6 +11,36 @@ import drawIconSelected from "./assets/draw-selected.svg";
 import downloadIcon from './assets/download.svg';
 import { saveAs } from 'file-saver';
 import ColorPicker from './ColorPicker';
+import toggleIcon from './assets/toggle-icon.svg';
+
+function PaletteModal({togglePalette, isReplaceMode, setIsReplaceMode, palette, setPalette, brushColor, setBrushColor}){
+  return(
+  <div className="overlay" onClick={togglePalette}>
+    <ColorPicker isReplaceMode = {isReplaceMode} setIsReplaceMode={setIsReplaceMode} palette={palette} setPalette={setPalette} brushColor={brushColor} setBrushColor={setBrushColor} />
+    <div className="modal">
+      {palette.map((color, index) => (
+        <div
+          key={index}
+          className="color"
+          style={{ backgroundColor: color }}
+          onClick={(e) => {
+            e.stopPropagation(); // Prevent the overlay click from closing the modal
+            if(isReplaceMode){
+              const newPalette = [...palette];
+              newPalette[index] = brushColor;
+              setPalette(newPalette);
+              setIsReplaceMode(false);
+            }
+            else{
+              setBrushColor(color);
+            }
+          }}
+        ></div>
+      ))}
+    </div>
+  </div>
+);
+        }
 
 function ToolBar({ isGrid, setIsGrid, brushColor, setBrushColor, setMode, mode }) {
   const VIEW = 0;
@@ -21,6 +51,8 @@ function ToolBar({ isGrid, setIsGrid, brushColor, setBrushColor, setMode, mode }
   const [palette, setPalette] = useState(["#240A34", "#891652", "#EABE6C", "#F3E99F", "#83C0C1", "#96E9C6", "", ""]);
   const [paletteVisible, setPaletteVisible] = useState(false);
   const [mostRecentColor, setMostRecentColor] = useState("#000");
+  const [toolBarVisible, setToolBarVisible] = useState(true); // State to toggle visibility of tool bar items
+
 
   const handleErase = () => {
     setMostRecentColor(brushColor);
@@ -36,42 +68,15 @@ function ToolBar({ isGrid, setIsGrid, brushColor, setBrushColor, setMode, mode }
   const handleDownload = () => {
     const fileData = ""; // You might need actual data here
     const blob = new Blob([fileData], { type: 'text/plain' });
-    saveAs(blob, 'drawing.pxr');
+    saveAs(blob, 'drawing');
   };
 
   const togglePalette = () => {
     setPaletteVisible(!paletteVisible);
   };
 
-  const renderPaletteModal = () => (
-    <div className="overlay" onClick={togglePalette}>
-      <ColorPicker isReplaceMode = {isReplaceMode} setIsReplaceMode={setIsReplaceMode} palette={palette} setPalette={setPalette} brushColor={brushColor} setBrushColor={setBrushColor} />
-      <div className="modal">
-        {palette.map((color, index) => (
-          <div
-            key={index}
-            className="color"
-            style={{ backgroundColor: color }}
-            onClick={(e) => {
-              e.stopPropagation(); // Prevent the overlay click from closing the modal
-              if(isReplaceMode){
-                const newPalette = [...palette];
-                newPalette[index] = brushColor;
-                setPalette(newPalette);
-                setIsReplaceMode(false);
-              }
-              else{
-                setBrushColor(color);
-              }
-            }}
-          ></div>
-        ))}
-      </div>
-    </div>
-  );
-
-  return (
-    <div className='ToolBar'>
+  const ToolBarItems = () => (
+    <div className="ToolBarItems">
       <div className="Icon" onClick={handleDownload}>
         <img src={downloadIcon} alt="Download" />
       </div>
@@ -90,7 +95,24 @@ function ToolBar({ isGrid, setIsGrid, brushColor, setBrushColor, setMode, mode }
       <div className="palette" onClick={togglePalette}>
         <div className="color" style={{ backgroundColor: `${brushColor}` }}></div>
       </div>
-      {paletteVisible && renderPaletteModal()}
+      {paletteVisible && <PaletteModal 
+        togglePalette={togglePalette}
+        isReplaceMode={isReplaceMode}
+        setIsReplaceMode = {setIsReplaceMode}
+        palette ={palette}
+        setPalette={setPalette}
+        brushColor={brushColor}
+        setBrushColor={setBrushColor}
+      />}
+    </div>
+  );
+
+  return (
+    <div className='ToolBar'>
+      {toolBarVisible && ToolBarItems()}
+      <div className="Icon" onClick={() => setToolBarVisible(!toolBarVisible)}>
+        <img src={toggleIcon} alt="Toggle Toolbar" />
+      </div>
     </div>
   );
 }

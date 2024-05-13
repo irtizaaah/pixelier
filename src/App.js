@@ -9,7 +9,7 @@ function App() {
   const ERASE = 2;
 
   const defaultBrushColor = "#000";
-  const defaultNumOfPixels = 32;
+  const defaultNumOfPixels = 256;
   const defaultIsGrid = false;
   const defaultMode = DRAW;
   const defaultBackgroundColor = "#fff";
@@ -25,12 +25,15 @@ function App() {
   return (
     <div className='App'>
       <ToolBar 
+        numOfPixels={numOfPixels}
+        drawing={drawing}
         brushColor={brushColor} 
         setBrushColor={setBrushColor} 
         setMode={setMode}
         mode={mode}
         isGrid={isGrid}
         setIsGrid={setIsGrid}
+        backgroundColor={backgroundColor}
       />
       <Frame 
         numOfPixels={numOfPixels} 

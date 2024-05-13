@@ -12,6 +12,7 @@ import downloadIcon from './assets/download.svg';
 import { saveAs } from 'file-saver';
 import ColorPicker from './ColorPicker';
 import toggleIcon from './assets/toggle-icon.svg';
+import { downloadImage } from './utility'; // Update this path
 
 function PaletteModal({togglePalette, isReplaceMode, setIsReplaceMode, palette, setPalette, brushColor, setBrushColor}){
   return(
@@ -42,7 +43,7 @@ function PaletteModal({togglePalette, isReplaceMode, setIsReplaceMode, palette, 
 );
         }
 
-function ToolBar({ isGrid, setIsGrid, brushColor, setBrushColor, setMode, mode }) {
+function ToolBar({ backgroundColor, numOfPixels, drawing, isGrid, setIsGrid, brushColor, setBrushColor, setMode, mode }) {
   const VIEW = 0;
   const DRAW = 1;
   const ERASE = 2;
@@ -52,7 +53,6 @@ function ToolBar({ isGrid, setIsGrid, brushColor, setBrushColor, setMode, mode }
   const [paletteVisible, setPaletteVisible] = useState(false);
   const [mostRecentColor, setMostRecentColor] = useState("#000");
   const [toolBarVisible, setToolBarVisible] = useState(true); // State to toggle visibility of tool bar items
-
 
   const handleErase = () => {
     setMostRecentColor(brushColor);
@@ -69,19 +69,13 @@ function ToolBar({ isGrid, setIsGrid, brushColor, setBrushColor, setMode, mode }
     setMode(VIEW)
   };
 
-  const handleDownload = () => {
-    const fileData = ""; // You might need actual data here
-    const blob = new Blob([fileData], { type: 'text/plain' });
-    saveAs(blob, 'drawing');
-  };
-
   const togglePalette = () => {
     setPaletteVisible(!paletteVisible);
   };
 
-  const ToolBarItems = () => (
+  const ToolBarItems = (numOfPixels, drawing, backgroundColor) => (
     <div className="ToolBarItems">
-      <div className="Icon" onClick={handleDownload}>
+      <div className="Icon" onClick={()=>downloadImage(numOfPixels, drawing.current, backgroundColor)}>
         <img src={downloadIcon} alt="Download" />
       </div>
       <div className="Icon" onClick={() => setIsGrid(!isGrid)}>
@@ -113,7 +107,7 @@ function ToolBar({ isGrid, setIsGrid, brushColor, setBrushColor, setMode, mode }
 
   return (
     <div className='ToolBar'>
-      {toolBarVisible && ToolBarItems()}
+      {toolBarVisible && ToolBarItems(numOfPixels, drawing, backgroundColor)}
       <div className="Icon" onClick={() => setToolBarVisible(!toolBarVisible)}>
         <img src={toggleIcon} alt="Toggle Toolbar" />
       </div>

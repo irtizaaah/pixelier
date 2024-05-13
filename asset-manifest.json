@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/pixelier/static/css/main.58731dfa.css",
-    "main.js": "/pixelier/static/js/main.631a6d33.js",
+    "main.js": "/pixelier/static/js/main.3d36246d.js",
     "static/media/hand-selected.svg": "/pixelier/static/media/hand-selected.69cbcecdd304608be00157b160ec88e2.svg",
     "static/media/hand.svg": "/pixelier/static/media/hand.9c8c3c9d1956bdc92da0905d5d19ac25.svg",
     "static/media/download.svg": "/pixelier/static/media/download.4e4450bb62f9cde0e47e9ad125fe5fb9.svg",
@@ -14,10 +14,10 @@
     "static/media/grid.svg": "/pixelier/static/media/grid.e65caf498522c96417d5b107c9c2a657.svg",
     "static/media/toggle-icon.svg": "/pixelier/static/media/toggle-icon.430cc5ee187285edcf0ff66358e6edaa.svg",
     "main.58731dfa.css.map": "/pixelier/static/css/main.58731dfa.css.map",
-    "main.631a6d33.js.map": "/pixelier/static/js/main.631a6d33.js.map"
+    "main.3d36246d.js.map": "/pixelier/static/js/main.3d36246d.js.map"
   },
   "entrypoints": [
     "static/css/main.58731dfa.css",
-    "static/js/main.631a6d33.js"
+    "static/js/main.3d36246d.js"
   ]
 }

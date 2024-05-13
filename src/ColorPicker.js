@@ -49,6 +49,10 @@ function ColorPicker({setIsReplaceMode, palette, brushColor, setBrushColor, setP
     setHex(hslToHex(hue, saturation, lightness));
   },[hue, saturation, lightness]) 
 
+  useEffect(()=>{
+    updateHSLA(brushColor);
+  },[brushColor]) 
+
   const updateHSLA = (hex) =>{
     let hsla = hexToHSLA(hex)
     setHue(hsla.h);

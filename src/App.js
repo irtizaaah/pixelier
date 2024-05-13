@@ -9,7 +9,7 @@ function App() {
   const ERASE = 2;
 
   const defaultBrushColor = "#000";
-  const defaultNumOfPixels = 256;
+  const defaultNumOfPixels = 64;
   const defaultIsGrid = false;
   const defaultMode = DRAW;
   const defaultBackgroundColor = "#fff";

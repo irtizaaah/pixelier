@@ -6,13 +6,16 @@ const Layer = ({ numOfPixels, brushColor, isGrid, mode, backgroundColor, drawing
   const isDrawing = useRef(false);
 
   const setEventHandlers = (square, index, isDrawing) => {
+    const DRAW = 1;
+    const ERASE = 2;
+
     square.onmousedown = (e) => {
       isDrawing.current = true;
-      draw(e.target);  // Start drawing on mousedown
+      if(mode===DRAW || mode===ERASE) draw(e.target);  // Start drawing on mousedown
     };
   
     square.onmouseenter = (e) => {
-      if(isDrawing.current) draw(e.target); // Continue drawing if mouse is down
+      if((mode===DRAW || mode===ERASE) && (isDrawing.current)) draw(e.target); // Continue drawing if mouse is down
     };
   
     square.onmouseup = () => {
@@ -22,7 +25,7 @@ const Layer = ({ numOfPixels, brushColor, isGrid, mode, backgroundColor, drawing
     // Touch events
     square.addEventListener('touchstart', (e) => {
       e.preventDefault();
-      isDrawing.current = true;
+      if(mode===DRAW || mode===ERASE) isDrawing.current = true;
       draw(e.target);
     }, { passive: false });
 
@@ -30,7 +33,7 @@ const Layer = ({ numOfPixels, brushColor, isGrid, mode, backgroundColor, drawing
       e.preventDefault();
       const touch = e.touches[0];
       const target = document.elementFromPoint(touch.clientX, touch.clientY);
-      if(target && isDrawing.current) draw(target);
+      if((mode===DRAW || mode===ERASE) &&target && isDrawing.current) draw(target);
     }, { passive: false });
     
     square.addEventListener('touchend', () => {
@@ -39,9 +42,6 @@ const Layer = ({ numOfPixels, brushColor, isGrid, mode, backgroundColor, drawing
   }
 
   useEffect(() => {
-    const DRAW = 1;
-    const ERASE = 2;
-
     const canvas = canvasRef.current;
     canvas.innerHTML = '';  // Clear previous isGrid
     isDrawing.current = false;
@@ -61,7 +61,7 @@ const Layer = ({ numOfPixels, brushColor, isGrid, mode, backgroundColor, drawing
         square.style.backgroundColor = drawing.current[index];
 
         // Attach mouse event handlers to each square
-        if(mode===DRAW || mode===ERASE) setEventHandlers(square, index, isDrawing);
+        setEventHandlers(square, index, isDrawing);
 
         canvas.appendChild(square);
       }

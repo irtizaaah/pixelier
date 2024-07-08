@@ -1,5 +1,5 @@
 # Pixelier
-[Try Me](https://irtizaaah.github.io/pixelier/)
+[Try Me](https://irtizaaah.github.io/pixelier-pixel_art_editor/)
 
 A clean and simple pixel art editor!
 
